@@ -12,12 +12,7 @@ Choose and return random content from different sources.
 
 ## Features
 
-* Generates badges like any you can see above.
-* No dependecies.
-* Small and possibly work even on client.
-* Easy to write own templating function.
-* Well tested.
-* Express/Connect middleware.
+// TODO
 
 ## Install
 
@@ -34,6 +29,9 @@ npm i -g rander
 
 Package | Version | Dev
 --- |:---:|:---:
+[chalk](https://www.npmjs.com/package/chalk) | ^1.1.1 | ✖
+[got](https://www.npmjs.com/package/got) | ^4.1.1 | ✖
+[homedir](https://www.npmjs.com/package/homedir) | ^0.6.0 | ✖
 [meow](https://www.npmjs.com/package/meow) | ^3.3.0 | ✖
 [babel](https://www.npmjs.com/package/babel) | ^5.8.21 | ✔
 [babel-eslint](https://www.npmjs.com/package/babel-eslint) | ^4.0.10 | ✔
