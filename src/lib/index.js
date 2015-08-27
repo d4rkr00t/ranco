@@ -49,6 +49,20 @@ class Rander {
     transport.run(params, this.getTransportConfig(transportName), this.imports);
   }
 
+  help(transportName) {
+    const transport = this.requirePlugin(transportName);
+
+    if (!transport) return;
+
+    if (!transport.run) {
+      this.messages.error(`Module 'rander-${transportName}' doesn't have help handler`);
+      return;
+    }
+
+    // TODO: help format
+    this.messages.help(transport.help());
+  }
+
   loadConfig(homeDir) {
     const configPath = path.join(homeDir, '.randerrc');
 

@@ -24,6 +24,8 @@ if (command === 'setup') {
   const transportName = input.shift();
 
   rander.setup(transportName, input);
+} else if (command === 'help') {
+  rander.help(input.shift());
 } else {
   rander.run(command, input);
 }

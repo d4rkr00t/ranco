@@ -1,5 +1,9 @@
 import chalk from 'chalk';
 
+export function result(title, url) {
+  console.log(`${chalk.blue('>')} ${title} — [ ${chalk.yellow(url)} ]`);
+}
+
 export function error(msg) {
   console.log(chalk.red(`[ERROR] `) + msg);
 }
@@ -17,5 +21,5 @@ export function success(msg) {
 }
 
 export function notice(msg) {
-  console.log(chalk.purple(msg));
+  console.log(chalk.cyan(msg));
 }
