@@ -1,12 +1,16 @@
 import fs from 'fs';
 import path from 'path';
+import { sample } from 'lodash';
 
 class Rander {
-  constructor(options = {}, imports) {
+  constructor(options = {}, imports = {}) {
     this.options = options;
-    this.imports = imports;
+
     this.messages = imports.messages;
     this.request = imports.request;
+
+    this.imports = imports;
+    this.imports.random = sample;
 
     this.config = this.loadConfig(options.homeDir);
   }
