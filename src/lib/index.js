@@ -67,6 +67,8 @@ class Rander {
   }
 
   loadConfig(homeDir) {
+    if (!homeDir) return {};
+
     const configPath = path.join(homeDir, '.randerrc');
 
     if (fs.existsSync(configPath)) {
