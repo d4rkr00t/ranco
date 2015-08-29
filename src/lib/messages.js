@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import indentString from 'indent-string';
-import { isArray } from 'lodash';
+import { isEmpty, isArray } from 'lodash';
 
 export function error(msg) {
   console.log(chalk.red(`[ERROR] `) + msg);
@@ -25,7 +25,9 @@ export function notice(msg) {
 export function results(result) {
   console.log('');
 
-  if (isArray(result)) {
+  if (isEmpty(result)) {
+    console.log(indentString('Nothing was found', ' ', 2));
+  } else if (isArray(result)) {
     result.map(row => console.log(indentString(row, ' ', 2)));
   } else {
     console.log(indentString(result, ' ', 2));

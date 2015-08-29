@@ -15,16 +15,20 @@ class Rander {
     this.config = this.loadConfig(options.homeDir);
   }
 
-  requirePlugin(transportName) {
+  requirePlugin(transportName, debug) {
     try {
       return require(`rander-${transportName}`);
     } catch (e) {
       this.messages.error(`Module with transportName 'rander-${transportName}' is not installed, try run npm i -g rander-${transportName}`);
+
+      if (debug) {
+        console.error(e);
+      }
     }
   }
 
   setup(transportName, args, flags) {
-    const transport = this.requirePlugin(transportName);
+    const transport = this.requirePlugin(transportName, flags.debug);
 
     if (!transport) return;
 
@@ -37,7 +41,7 @@ class Rander {
   }
 
   run(transportName, args, flags) {
-    const transport = this.requirePlugin(transportName);
+    const transport = this.requirePlugin(transportName, flags.debug);
 
     if (!transport) return;
 
@@ -49,8 +53,8 @@ class Rander {
     transport.run(args, flags, this.getTransportConfig(transportName), this.imports);
   }
 
-  help(transportName) {
-    const transport = this.requirePlugin(transportName);
+  help(transportName, flags) {
+    const transport = this.requirePlugin(transportName, flags.debug);
 
     if (!transport) return;
 

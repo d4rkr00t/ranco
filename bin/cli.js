@@ -50,7 +50,7 @@ if (_lodash.isEmpty(cli.input)) {
 
     rander.setup(transportName, input, flags);
   } else if (command === 'help') {
-    rander.help(input.shift());
+    rander.help(input.shift(), flags);
   } else {
     rander.run(command, input, flags);
   }
