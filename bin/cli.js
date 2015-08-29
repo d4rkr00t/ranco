@@ -17,6 +17,12 @@ var _homedir = require('homedir');
 
 var _homedir2 = _interopRequireDefault(_homedir);
 
+var _chalk = require('chalk');
+
+var _chalk2 = _interopRequireDefault(_chalk);
+
+var _lodash = require('lodash');
+
 var _lib = require('./../lib/');
 
 var _lib2 = _interopRequireDefault(_lib);
@@ -25,21 +31,27 @@ var _libMessages = require('./../lib/messages');
 
 var messages = _interopRequireWildcard(_libMessages);
 
-var rander = new _lib2['default']({ homeDir: _homedir2['default']() }, { messages: messages, request: _got2['default'] });
+var rander = new _lib2['default']({ homeDir: _homedir2['default']() }, { messages: messages, request: _got2['default'], chalk: _chalk2['default'] });
 
 var cli = _meow2['default']({
-  help: ['Usage', '  rander setup <transport> — for initial transport setup', '  rander <transport> params — runs transport with params']
+  pkg: '../package.json',
+  help: ['Usage:', '  rander setup <transport> — for initial transport setup', '  rander <transport> params -c <count> — runs transport with params and show <count> random results', '  rander help <transport> — shows help for transport', '', '  rander --help — shows rander help', '']
 });
 
-var input = cli.input || [];
-var command = input.shift();
-
-if (command === 'setup') {
-  var transportName = input.shift();
-
-  rander.setup(transportName, input);
-} else if (command === 'help') {
-  rander.help(input.shift());
+if (_lodash.isEmpty(cli.input)) {
+  console.log(cli.help);
 } else {
-  rander.run(command, input);
+  var input = cli.input || [];
+  var flags = cli.flags || {};
+  var command = input.shift();
+
+  if (command === 'setup') {
+    var transportName = input.shift();
+
+    rander.setup(transportName, input, flags);
+  } else if (command === 'help') {
+    rander.help(input.shift());
+  } else {
+    rander.run(command, input, flags);
+  }
 }

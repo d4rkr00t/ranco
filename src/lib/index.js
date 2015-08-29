@@ -23,7 +23,7 @@ class Rander {
     }
   }
 
-  setup(transportName, params) {
+  setup(transportName, args, flags) {
     const transport = this.requirePlugin(transportName);
 
     if (!transport) return;
@@ -33,10 +33,10 @@ class Rander {
       return;
     }
 
-    transport.setup(params, this.getTransportConfig(transportName), this.imports);
+    transport.setup(args, flags, this.getTransportConfig(transportName), this.imports);
   }
 
-  run(transportName, params) {
+  run(transportName, args, flags) {
     const transport = this.requirePlugin(transportName);
 
     if (!transport) return;
@@ -46,7 +46,7 @@ class Rander {
       return;
     }
 
-    transport.run(params, this.getTransportConfig(transportName), this.imports);
+    transport.run(args, flags, this.getTransportConfig(transportName), this.imports);
   }
 
   help(transportName) {
@@ -54,13 +54,12 @@ class Rander {
 
     if (!transport) return;
 
-    if (!transport.run) {
+    if (!transport.help) {
       this.messages.error(`Module 'rander-${transportName}' doesn't have help handler`);
       return;
     }
 
-    // TODO: help format
-    this.messages.help(transport.help());
+    this.messages.help(transportName, transport.help());
   }
 
   loadConfig(homeDir) {

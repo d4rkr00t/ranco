@@ -1,8 +1,6 @@
 import chalk from 'chalk';
-
-export function result(title, url) {
-  console.log(`${chalk.blue('>')} ${title} — [ ${chalk.yellow(url)} ]`);
-}
+import indentString from 'indent-string';
+import { isArray } from 'lodash';
 
 export function error(msg) {
   console.log(chalk.red(`[ERROR] `) + msg);
@@ -17,9 +15,40 @@ export function info(msg) {
 }
 
 export function success(msg) {
-  console.log(chalk.yellow(msg));
+  console.log(chalk.green(msg));
 }
 
 export function notice(msg) {
   console.log(chalk.cyan(msg));
+}
+
+export function results(result) {
+  console.log('');
+
+  if (isArray(result)) {
+    result.map(row => console.log(indentString(row, ' ', 2)));
+  } else {
+    console.log(indentString(result, ' ', 2));
+  }
+
+  console.log('');
+}
+
+export function help(transportName, helpMsg) {
+  const rowMsgStart = `rander ${transportName}`;
+
+  console.log('');
+  console.log(indentString(`Usage for ${transportName}:`, ' ', 2));
+
+  if (isArray(helpMsg)) {
+    helpMsg.map(row => console.log(indentString(`${rowMsgStart} ${row}`, ' ', 4)));
+  } else {
+    console.log(indentString(`${rowMsgStart} ${helpMsg}`, ' ', 4));
+  }
+
+  console.log('');
+}
+
+export function commandNotFound(transportName, command) {
+  error(`Command ${command} not found in ${transportName} transport.`);
 }
