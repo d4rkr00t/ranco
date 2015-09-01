@@ -32,6 +32,8 @@ Package | Version | Dev
 [chalk](https://www.npmjs.com/package/chalk) | ^1.1.1 | ✖
 [got](https://www.npmjs.com/package/got) | ^4.1.1 | ✖
 [homedir](https://www.npmjs.com/package/homedir) | ^0.6.0 | ✖
+[indent-string](https://www.npmjs.com/package/indent-string) | ^2.1.0 | ✖
+[lodash](https://www.npmjs.com/package/lodash) | ^3.10.1 | ✖
 [meow](https://www.npmjs.com/package/meow) | ^3.3.0 | ✖
 [babel](https://www.npmjs.com/package/babel) | ^5.8.21 | ✔
 [babel-eslint](https://www.npmjs.com/package/babel-eslint) | ^4.0.10 | ✔

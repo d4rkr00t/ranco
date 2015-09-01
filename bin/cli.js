@@ -35,7 +35,7 @@ var rander = new _lib2['default']({ homeDir: _homedir2['default']() }, { message
 
 var cli = _meow2['default']({
   pkg: '../package.json',
-  help: ['Usage:', '  rander setup <transport> — for initial transport setup', '  rander <transport> params -c <count> — runs transport with params and show <count> random results', '  rander help <transport> — shows help for transport', '', '  rander --help — shows rander help', '']
+  help: ['Usage', '  rander setup <transport>   for initial transport setup', '  rander <transport> params  runs transport with params and show random results', '  rander help <transport>    shows help for transport', '  rander --help              shows rander help', '', 'Options', '  -c  count of results [Default: 1]', '']
 });
 
 if (_lodash.isEmpty(cli.input)) {

@@ -37,15 +37,12 @@ export function results(result) {
 }
 
 export function help(transportName, helpMsg) {
-  const rowMsgStart = `rander ${transportName}`;
-
   console.log('');
-  console.log(indentString(`Usage for ${transportName}:`, ' ', 2));
 
   if (isArray(helpMsg)) {
-    helpMsg.map(row => console.log(indentString(`${rowMsgStart} ${row}`, ' ', 4)));
+    helpMsg.map(row => console.log(`  ${row}`));
   } else {
-    console.log(indentString(`${rowMsgStart} ${helpMsg}`, ' ', 4));
+    console.log(`  ${helpMsg}`);
   }
 
   console.log('');

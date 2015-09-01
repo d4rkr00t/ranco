@@ -15,12 +15,14 @@ const rander = new Rander({ homeDir: homedir() }, { messages, request: got, chal
 const cli = meow({
   pkg: '../package.json',
   help: [
-    'Usage:',
-    '  rander setup <transport> — for initial transport setup',
-    '  rander <transport> params -c <count> — runs transport with params and show <count> random results',
-    '  rander help <transport> — shows help for transport',
+    'Usage',
+    '  rander setup <transport>   for initial transport setup',
+    '  rander <transport> params  runs transport with params and show random results',
+    '  rander help <transport>    shows help for transport',
+    '  rander --help              shows rander help',
     '',
-    '  rander --help — shows rander help',
+    'Options',
+    '  -c  count of results [Default: 1]',
     ''
   ]
 });
