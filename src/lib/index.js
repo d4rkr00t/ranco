@@ -8,6 +8,7 @@ class Rander {
 
     this.messages = imports.messages;
     this.request = imports.request;
+    this.require = imports.require || require;
 
     this.imports = imports;
     this.imports.random = sample;
@@ -17,12 +18,12 @@ class Rander {
 
   requirePlugin(transportName, debug) {
     try {
-      return require(`rander-${transportName}`);
+      return this.require(`rander-${transportName}`);
     } catch (e) {
       this.messages.error(`Module with transportName 'rander-${transportName}' is not installed, try run npm i -g rander-${transportName}`);
 
       if (debug) {
-        console.error(e);
+        console.error(e.stack);
       }
     }
   }
