@@ -20,7 +20,7 @@
     "validate": "npm run lint && npm run build && npm test"
   },
   "bin": {
-    "rander": "bin/cli.js"
+    "ranco": "bin/cli.js"
   },
   "keywords": [
     "random"
