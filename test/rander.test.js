@@ -11,7 +11,6 @@ describe('Ranco Class', () => {
     let ranco;
     beforeEach(() => {
       ranco = new Ranco({}, {
-        messages: {},
         require(transportName) {
           return transportName;
         }
@@ -22,12 +21,13 @@ describe('Ranco Class', () => {
       assert.equal(ranco.requirePlugin('transport'), 'ranco-transport');
     });
 
-    it('should show error message if error was thrown while requiring plugin', done => {
+    it('should show error message if error was thrown while requiring plugin', () => {
       ranco.require = () => { throw new Error('error'); };
-
-      ranco.messages.error = () => done();
+      ranco.messages = { error: sinon.stub() };
 
       ranco.requirePlugin('transport');
+
+      assert.called(ranco.messages.error);
     });
   });
 
@@ -44,15 +44,20 @@ describe('Ranco Class', () => {
         assert.notOk(ranco[method]('transport', [], {}));
       });
 
-      it(`should show error message if there is no method ${method} handler in transport`, done => {
+      it(`should show error message if there is no method ${method} handler in transport`, () => {
         ranco.requirePlugin = () => { return {}; };
-        ranco.messages = { error() { done(); } };
+        ranco.messages = { error: sinon.stub() };
         ranco[method]('transport', [], {});
+
+        assert.called(ranco.messages.error);
       });
 
-      it(`should call ${method} method of tranpsort`, done => {
-        ranco.requirePlugin = () => { return { [method]() { done(); } }; };
+      it(`should call ${method} method of tranpsort`, () => {
+        const methodStub = sinon.stub();
+        ranco.requirePlugin = () => { return { [method]: methodStub }; };
         ranco[method]('transport', [], {});
+
+        assert.called(methodStub);
       });
     });
 
@@ -68,16 +73,21 @@ describe('Ranco Class', () => {
         assert.notOk(ranco.help('transport', [], {}));
       });
 
-      it('should show error message if there is no method help handler in transport', done => {
+      it('should show error message if there is no method help handler in transport', () => {
         ranco.requirePlugin = () => { return {}; };
-        ranco.messages = { error() { done(); } };
+        ranco.messages = { error: sinon.stub() };
         ranco.help('transport', [], {});
+
+        assert.called(ranco.messages.error);
       });
 
-      it('should show help of tranpsort', done => {
-        ranco.messages = { help() { done(); } };
+      it('should show help of tranpsort', () => {
+        const methodStub = sinon.stub();
+        ranco.messages = { help: methodStub };
         ranco.requirePlugin = () => { return { help() {} }; };
         ranco.help('transport', [], {});
+
+        assert.called(methodStub);
       });
     });
   });
