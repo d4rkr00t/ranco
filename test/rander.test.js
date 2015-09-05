@@ -1,16 +1,16 @@
-import Rander from '../src/lib/';
+import Ranco from '../src/lib/';
 
-describe('Rander Class', () => {
+describe('Ranco Class', () => {
   describe('#constructor', () => {
     it('should not throw when instantiating class', () => {
-      assert.doesNotThrow(() => new Rander());
+      assert.doesNotThrow(() => new Ranco());
     });
   });
 
   describe('#requirePlugin', () => {
-    let rander;
+    let ranco;
     beforeEach(() => {
-      rander = new Rander({}, {
+      ranco = new Ranco({}, {
         messages: {},
         require(transportName) {
           return transportName;
@@ -19,65 +19,65 @@ describe('Rander Class', () => {
     });
 
     it('should require plugin', () => {
-      assert.equal(rander.requirePlugin('transport'), 'rander-transport');
+      assert.equal(ranco.requirePlugin('transport'), 'ranco-transport');
     });
 
     it('should show error message if error was thrown while requiring plugin', done => {
-      rander.require = () => { throw new Error('error'); };
+      ranco.require = () => { throw new Error('error'); };
 
-      rander.messages.error = () => done();
+      ranco.messages.error = () => done();
 
-      rander.requirePlugin('transport');
+      ranco.requirePlugin('transport');
     });
   });
 
   ['setup', 'run'].map(method => {
     describe(`#${method}`, () => {
-      let rander;
+      let ranco;
       beforeEach(() => {
-        rander = new Rander();
+        ranco = new Ranco();
       });
 
       it('should return nothing if there is no transport', () => {
-        rander.requirePlugin = () => null;
+        ranco.requirePlugin = () => null;
 
-        assert.notOk(rander[method]('transport', [], {}));
+        assert.notOk(ranco[method]('transport', [], {}));
       });
 
       it(`should show error message if there is no method ${method} handler in transport`, done => {
-        rander.requirePlugin = () => { return {}; };
-        rander.messages = { error() { done(); } };
-        rander[method]('transport', [], {});
+        ranco.requirePlugin = () => { return {}; };
+        ranco.messages = { error() { done(); } };
+        ranco[method]('transport', [], {});
       });
 
       it(`should call ${method} method of tranpsort`, done => {
-        rander.requirePlugin = () => { return { [method]() { done(); } }; };
-        rander[method]('transport', [], {});
+        ranco.requirePlugin = () => { return { [method]() { done(); } }; };
+        ranco[method]('transport', [], {});
       });
     });
 
     describe('#help', () => {
-      let rander;
+      let ranco;
       beforeEach(() => {
-        rander = new Rander();
+        ranco = new Ranco();
       });
 
       it('should return nothing if there is no transport', () => {
-        rander.requirePlugin = () => null;
+        ranco.requirePlugin = () => null;
 
-        assert.notOk(rander.help('transport', [], {}));
+        assert.notOk(ranco.help('transport', [], {}));
       });
 
       it('should show error message if there is no method help handler in transport', done => {
-        rander.requirePlugin = () => { return {}; };
-        rander.messages = { error() { done(); } };
-        rander.help('transport', [], {});
+        ranco.requirePlugin = () => { return {}; };
+        ranco.messages = { error() { done(); } };
+        ranco.help('transport', [], {});
       });
 
       it('should show help of tranpsort', done => {
-        rander.messages = { help() { done(); } };
-        rander.requirePlugin = () => { return { help() {} }; };
-        rander.help('transport', [], {});
+        ranco.messages = { help() { done(); } };
+        ranco.requirePlugin = () => { return { help() {} }; };
+        ranco.help('transport', [], {});
       });
     });
   });

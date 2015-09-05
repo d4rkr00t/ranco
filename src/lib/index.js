@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { sample } from 'lodash';
 
-class Rander {
+class Ranco {
   constructor(options = {}, imports = {}) {
     this.options = options;
 
@@ -18,9 +18,9 @@ class Rander {
 
   requirePlugin(transportName, debug) {
     try {
-      return this.require(`rander-${transportName}`);
+      return this.require(`ranco-${transportName}`);
     } catch (e) {
-      this.messages.error(`Module with transportName 'rander-${transportName}' is not installed, try run npm i -g rander-${transportName}`);
+      this.messages.error(`Module with transportName 'ranco-${transportName}' is not installed, try run npm i -g ranco-${transportName}`);
 
       if (debug) {
         console.error(e.stack);
@@ -34,7 +34,7 @@ class Rander {
     if (!transport) return;
 
     if (!transport.setup) {
-      this.messages.error(`Module 'rander-${transportName}' doesn't have setup handler`);
+      this.messages.error(`Module 'ranco-${transportName}' doesn't have setup handler`);
       return;
     }
 
@@ -47,7 +47,7 @@ class Rander {
     if (!transport) return;
 
     if (!transport.run) {
-      this.messages.error(`Module 'rander-${transportName}' doesn't have run handler`);
+      this.messages.error(`Module 'ranco-${transportName}' doesn't have run handler`);
       return;
     }
 
@@ -60,7 +60,7 @@ class Rander {
     if (!transport) return;
 
     if (!transport.help) {
-      this.messages.error(`Module 'rander-${transportName}' doesn't have help handler`);
+      this.messages.error(`Module 'ranco-${transportName}' doesn't have help handler`);
       return;
     }
 
@@ -70,7 +70,7 @@ class Rander {
   loadConfig(homeDir) {
     if (!homeDir) return {};
 
-    const configPath = path.join(homeDir, '.randerrc');
+    const configPath = path.join(homeDir, '.rancorc');
 
     if (fs.existsSync(configPath)) {
       return JSON.parse(fs.readFileSync(configPath));
@@ -84,4 +84,4 @@ class Rander {
   }
 }
 
-export default Rander;
+export default Ranco;

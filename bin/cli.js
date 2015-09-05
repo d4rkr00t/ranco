@@ -31,11 +31,11 @@ var _libMessages = require('./../lib/messages');
 
 var messages = _interopRequireWildcard(_libMessages);
 
-var rander = new _lib2['default']({ homeDir: _homedir2['default']() }, { messages: messages, request: _got2['default'], chalk: _chalk2['default'] });
+var ranco = new _lib2['default']({ homeDir: _homedir2['default']() }, { messages: messages, request: _got2['default'], chalk: _chalk2['default'] });
 
 var cli = _meow2['default']({
   pkg: '../package.json',
-  help: ['Usage', '  rander setup <transport>   for initial transport setup', '  rander <transport> params  runs transport with params and show random results', '  rander help <transport>    shows help for transport', '  rander --help              shows rander help', '', 'Options', '  -c  count of results [Default: 1]', '']
+  help: ['Usage', '  ranco setup <transport>   for initial transport setup', '  ranco <transport> params  runs transport with params and show random results', '  ranco help <transport>    shows help for transport', '  ranco --help              shows ranco help', '', 'Options', '  -c  count of results [Default: 1]', '']
 });
 
 if (_lodash.isEmpty(cli.input)) {
@@ -48,10 +48,10 @@ if (_lodash.isEmpty(cli.input)) {
   if (command === 'setup') {
     var transportName = input.shift();
 
-    rander.setup(transportName, input, flags);
+    ranco.setup(transportName, input, flags);
   } else if (command === 'help') {
-    rander.help(input.shift(), flags);
+    ranco.help(input.shift(), flags);
   } else {
-    rander.run(command, input, flags);
+    ranco.run(command, input, flags);
   }
 }

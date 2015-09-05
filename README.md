@@ -1,28 +1,36 @@
-# rander
+# ranco
 
-[![npm](https://img.shields.io/npm/v/rander.svg)](https://www.npmjs.com/package/rander)
-[![license](https://img.shields.io/npm/l/rander.svg)](http://opensource.org/licenses/MIT)
-[![github-issues](https://img.shields.io/github/issues/d4rkr00t/rander.svg)](https://github.com/d4rkr00t/rander/issues)
-[![travis-status](https://img.shields.io/travis/d4rkr00t/rander.svg)](https://travis-ci.org/d4rkr00t/rander)
-[![coveralls](https://img.shields.io/coveralls/d4rkr00t/rander.svg)](https://coveralls.io/github/d4rkr00t/rander)
+[![npm](https://img.shields.io/npm/v/ranco.svg)](https://www.npmjs.com/package/ranco)
+[![license](https://img.shields.io/npm/l/ranco.svg)](http://opensource.org/licenses/MIT)
+[![github-issues](https://img.shields.io/github/issues/d4rkr00t/ranco.svg)](https://github.com/d4rkr00t/ranco/issues)
+[![travis-status](https://img.shields.io/travis/d4rkr00t/ranco.svg)](https://travis-ci.org/d4rkr00t/ranco)
+[![coveralls](https://img.shields.io/coveralls/d4rkr00t/ranco.svg)](https://coveralls.io/github/d4rkr00t/ranco)
 
 Choose and return random content from different sources.
 
-![nodei.co](https://nodei.co/npm/rander.png?downloads=true&downloadRank=true&stars=true)
-
-## Features
-
-// TODO
+![nodei.co](https://nodei.co/npm/ranco.png?downloads=true&downloadRank=true&stars=true)
 
 ## Install
 
 ```
-npm i -g rander
+npm i -g ranco
 ```
 
 ## Usage
 
 ### CLI
+```bash
+Usage
+  ranco setup <transport>   for initial transport setup
+  ranco <transport> params  runs transport with params and show random results
+  ranco help <transport>    shows help for transport
+  ranco --help              shows ranco help
+
+Options
+  -c  count of results [Default: 1]
+```
+
+## Transports
 // TODO
 
 ## Dependencies
@@ -46,6 +54,7 @@ Package | Version | Dev
 [node-readme](https://www.npmjs.com/package/node-readme) | ^0.1.8 | ✔
 [nsp](https://www.npmjs.com/package/nsp) | ^1.1.0 | ✔
 [pre-commit](https://www.npmjs.com/package/pre-commit) | ^1.1.1 | ✔
+[sinon](https://www.npmjs.com/package/sinon) | ^1.16.1 | ✔
 
 
 ## Author
