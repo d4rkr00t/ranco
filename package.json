@@ -15,6 +15,7 @@
     "lint": "eslint src test",
     "precheck": "npm run validate",
     "prepublish": "npm run readme | npm run build",
+    "preuninstall": "trash ~/.rancorc && trash ~/.ranco_cache.json",
     "readme": "node ./node_modules/node-readme/bin/node-readme.js",
     "test": "mocha test/*.test.js -r babel/register -r test/setup.js",
     "validate": "npm run lint && npm run build && npm test"
@@ -53,6 +54,7 @@
     "homedir": "^0.6.0",
     "indent-string": "^2.1.0",
     "lodash": "^3.10.1",
-    "meow": "^3.3.0"
+    "meow": "^3.3.0",
+    "trash": "^2.0.0"
   }
 }
