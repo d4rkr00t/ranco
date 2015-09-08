@@ -1,6 +1,9 @@
-import fs from 'fs';
-import path from 'path';
+import _fs from 'fs';
+import _path from 'path';
+import childProcess from 'child_process';
 import { sample } from 'lodash';
+
+const CACHE = '.ranco_cache.json';
 
 class Ranco {
   constructor(options = {}, imports = {}) {
@@ -9,16 +12,23 @@ class Ranco {
     this.messages = imports.messages;
     this.request = imports.request;
     this.require = imports.require || require;
+    this.fs = imports.fs || _fs;
+    this.path = imports.path || _path;
+    this.execCmd = imports.execCmd || childProcess.exec;
 
     this.imports = imports;
     this.imports.random = sample;
+
+    this.setupPkgsPath(options.homeDir);
 
     this.config = this.loadConfig(options.homeDir);
   }
 
   requirePlugin(transportName, debug) {
+    const transportPath = this.path.join(this.pkgsPath, `ranco-${transportName}`);
+
     try {
-      return this.require(`ranco-${transportName}`);
+      return this.require(transportPath);
     } catch (e) {
       this.messages.error(`Module with transportName 'ranco-${transportName}' is not installed, try run npm i -g ranco-${transportName}`);
 
@@ -70,13 +80,31 @@ class Ranco {
   loadConfig(homeDir) {
     if (!homeDir) return {};
 
-    const configPath = path.join(homeDir, '.rancorc');
+    const fs = this.fs;
+
+    const configPath = this.path.join(homeDir, '.rancorc');
 
     if (fs.existsSync(configPath)) {
       return JSON.parse(fs.readFileSync(configPath));
     }
 
     return {};
+  }
+
+  setupPkgsPath(homeDir) {
+    const cachePath = this.path.join(homeDir, CACHE);
+
+    if (this.fs.existsSync(cachePath)) {
+      this.pkgsPath = this.require(cachePath).pkgsPath;
+    } else {
+      this.execCmd('npm config get prefix', (error, stdout) => {
+        const prefix = stdout.replace('\n', '').replace('\r', '');
+
+        this.pkgsPath = this.path.join(prefix, 'lib', 'node_modules');
+
+        this.fs.writeFileSync(cachePath, `{ "pkgsPath": "${this.pkgsPath}" }`, { flag: 'w' });
+      });
+    }
   }
 
   getTransportConfig(transportName) {
