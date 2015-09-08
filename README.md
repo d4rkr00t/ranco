@@ -43,6 +43,7 @@ Package | Version | Dev
 [indent-string](https://www.npmjs.com/package/indent-string) | ^2.1.0 | ✖
 [lodash](https://www.npmjs.com/package/lodash) | ^3.10.1 | ✖
 [meow](https://www.npmjs.com/package/meow) | ^3.3.0 | ✖
+[trash](https://www.npmjs.com/package/trash) | ^2.0.0 | ✖
 [babel](https://www.npmjs.com/package/babel) | ^5.8.23 | ✔
 [babel-eslint](https://www.npmjs.com/package/babel-eslint) | ^4.1.1 | ✔
 [chai](https://www.npmjs.com/package/chai) | ^3.2.0 | ✔
